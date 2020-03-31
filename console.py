@@ -43,6 +43,8 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
+            # -> split pasarle my_list[1:]
+            # -> update al objeto
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
@@ -248,6 +250,28 @@ class HBNBCommand(cmd.Cmd):
         else:
             cmd.Cmd.default(self, line)
 
+    def param_parser(self, params):
+        # create State name="California"
+        #        0                1
+        # ["price 0912309",name="California", "amenety="algo""]
+        # resutl_params = ["name "California"", "amenety "algo""]
+        result_params = []
+        for param in params:
+            if "=" not in param:
+                continue
+            # pair[0] -> key_name
+            # pair[1] -> value
+            pair = param.split("=")
+            if pair[1][0] == "\"" and pair[1][-1:] == "\"":
+                pair[1] = pair[1].replace("_", " ")
+            else:
+                try:
+                    float(pair[1])
+                except Exception:
+                    continue
+            result_params.append(" ".join(pair))
+        return result_params
+            
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+     HBNBCommand().cmdloop()
