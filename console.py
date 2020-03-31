@@ -49,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
             for param in params:
                 self.do_update(my_list[0]+" "+obj.id+" "+param)
             obj.save()
+            print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
         except NameError:
