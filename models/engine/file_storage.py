@@ -60,7 +60,10 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
+        """delete a value
+        """
         try:
             del self.__objects["{}.{}".format(obj.__class__, obj.id)]
+            self.save()
         except KeyError:
             return
