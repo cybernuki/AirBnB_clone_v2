@@ -44,9 +44,11 @@ class HBNBCommand(cmd.Cmd):
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
             # -> split pasarle my_list[1:]
+            params = self.param_parser(my_list[1:])
             # -> update al objeto
+            for param in params:
+                self.do_update(my_list[0]+" "+obj.id+" "+param)
             obj.save()
-            print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
         except NameError:
@@ -253,7 +255,7 @@ class HBNBCommand(cmd.Cmd):
     def param_parser(self, params):
         # create State name="California"
         #        0                1
-        # ["price 0912309",name="California", "amenety="algo""]
+        # ["price=092309.,name="California", "amenety="algo""]
         # resutl_params = ["name "California"", "amenety "algo""]
         result_params = []
         for param in params:
@@ -271,7 +273,6 @@ class HBNBCommand(cmd.Cmd):
                     continue
             result_params.append(" ".join(pair))
         return result_params
-            
 
 if __name__ == '__main__':
-     HBNBCommand().cmdloop()
+    HBNBCommand().cmdloop()
