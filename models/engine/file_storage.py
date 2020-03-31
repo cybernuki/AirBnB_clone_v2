@@ -26,8 +26,9 @@ class FileStorage:
             returns a dictionary of __object
         """
         if cls:
-            return {key:value for (key, value) in self.__objects.items()
-            if isinstance(value, cls)}
+            return {key: value
+                    for (key, value) in self.__objects.items()
+                    if isinstance(value, cls)}
         return self.__objects
 
     def new(self, obj):
