@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """This is the city class"""
 from models.base_model import BaseModel
-
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 class City(BaseModel):
     """This is the class for City
@@ -11,3 +12,5 @@ class City(BaseModel):
     """
     state_id = ""
     name = ""
+
+    places = relationship("Place", backref="cities", cascade="all, delete-orphan")
