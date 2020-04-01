@@ -254,6 +254,8 @@ class HBNBCommand(cmd.Cmd):
             cmd.Cmd.default(self, line)
 
     def param_parser(self, params):
+        """it parses arguments
+        """
         # create State name="California"
         #        0                1
         # ["price=092309.,name="California", "amenety="algo""]
