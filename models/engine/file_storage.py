@@ -64,7 +64,7 @@ class FileStorage:
         """delete a value
         """
         try:
-            del self.__objects["{}.{}".format(obj.__class__, obj.id)]
+            del self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)]
             self.save()
         except KeyError:
             return
