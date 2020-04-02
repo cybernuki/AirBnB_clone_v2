@@ -24,7 +24,7 @@ class DBStorage:
     def __init__(self):
         """
         """
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'.format
                 (user, password, host, database),
                 pool_pre_ping=True)
 
@@ -34,32 +34,32 @@ class DBStorage:
     def all(self, cls=None):
         """
         """
-        _dict = {}
+        _obj = {}
         if cls is None:
-            _obj = []
-            classes = ['User', 'State', 'City', 'Place', 'Review', 'Amenity']
+            _objects = []
+            classes = ['User', 'State', 'City', 'Place', 'Review']
             for _class in classes:
                 result = self.__session.query(eval(_class))
                 for res in result:
-                    _obj.append(res)
+                    _objects.append(res)
         else:
-            _obj = self.__session.query(cls).all()
-        for obj in _obj:
-            key = obj.__class__.__name__ + "." + str(obj.id)
-            _dict[key] = obj
-        return _dict
+            _objects = self.__session.query(cls).all()
+        for obj in _objects:
+            key = type(obj).__class__.__name__ + "." + str(obj.id)
+            _obj[key] = obj
+        return _obj
 
     def new(self, obj):
         """
         """
+        print('new print')
         if obj:
-            self.__session.add()
+            self.__session.add(obj)
 
     def save(self):
         """
         """
-        if obj:
-            self.__session.commit()
+        self.__session.commit()
 
     def delete(self, obj=None):
         """
