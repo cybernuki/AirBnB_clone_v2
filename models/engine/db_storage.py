@@ -37,7 +37,7 @@ class DBStorage:
         _dict = {}
         if cls is None:
             _obj = []
-            classes = ['User', 'State', 'City', 'Place', 'Review']
+            classes = ['User', 'State', 'City', 'Place', 'Review', 'Amenity']
             for _class in classes:
                 result = self.__session.query(eval(_class))
                 for res in result:
