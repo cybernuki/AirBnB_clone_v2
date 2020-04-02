@@ -8,7 +8,7 @@ from os import getenv
 
 
 
-class State(BaseModel):
+class State(BaseModel, Base):
     """This is the class for State
     Attributes:
         name: input name
