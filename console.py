@@ -11,6 +11,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from shlex import split
+from os import getenv
 
 
 class HBNBCommand(cmd.Cmd):
@@ -47,7 +48,8 @@ class HBNBCommand(cmd.Cmd):
             params = self.param_parser(my_list[1:])
             # -> update al objeto
             for param in params:
-                self.do_update(my_list[0]+" "+obj.id+" "+param)
+                values = param.split(" ")
+                setattr(obj, values[0], values[1])
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
