@@ -5,7 +5,7 @@ from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class User(BaseModel. Base):
+class User(BaseModel, Base):
     """This is the class for user
     Attributes:
         email: email address
