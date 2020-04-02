@@ -35,7 +35,7 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
             # id
-            if not kwards.get("id"):
+            if not kwargs.get("id"):
                 self.id = str(uuid.uuid4())
             # datetime
             if self.created_at is None:
@@ -80,6 +80,6 @@ class BaseModel:
         my_dict["__class__"] = str(type(self).__name__)
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
-        if '_sa_instance_state' in my_dict['_sa_instance_state']:
-            del my_dict['_sa_instance_state']
+        if "_sa_instance_state" in my_dict:
+            del(my_dict['_sa_instance_state'])
         return my_dict
