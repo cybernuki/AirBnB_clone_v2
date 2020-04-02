@@ -13,10 +13,9 @@ from os import getenv
 
 
 if getenv('HBNB_TYPE_STORAGE') == 'db':
-    print('DB')
     storage = DBStorage()
 else:
-    print('FS')
+    
     storage = FileStorage()
 
 storage.reload()

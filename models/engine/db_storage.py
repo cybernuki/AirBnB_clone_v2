@@ -45,14 +45,13 @@ class DBStorage:
         else:
             _objects = self.__session.query(cls).all()
         for obj in _objects:
-            key = type(obj).__class__.__name__ + "." + str(obj.id)
+            key = type(obj).__name__ + "." + str(obj.id)
             _obj[key] = obj
         return _obj
 
     def new(self, obj):
         """
         """
-        print('new print')
         if obj:
             self.__session.add(obj)
 
