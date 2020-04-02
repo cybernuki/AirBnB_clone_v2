@@ -36,6 +36,7 @@ Ex:
 Ex:
 `destroy Place my_place_id`
 
+
 #### All
 `all` or `all <class name>`
 Ex:
