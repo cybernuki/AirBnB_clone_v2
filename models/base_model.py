@@ -82,8 +82,6 @@ class BaseModel:
         my_dict["updated_at"] = self.updated_at.isoformat()
         try:
             del(my_dict['_sa_instance_state'])
-            print("go into delete key")
         except Exception:
-            print("no found key")
             return my_dict
         return my_dict
