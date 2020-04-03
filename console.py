@@ -11,7 +11,6 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from shlex import split
-from os import getenv
 
 
 class HBNBCommand(cmd.Cmd):
@@ -44,12 +43,18 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
-            # -> split pasarle my_list[1:]
-            params = self.param_parser(my_list[1:])
-            # -> update al objeto
-            for param in params:
-                values = param.split(" ")
-                setattr(obj, values[0], values[1])
+            elements = my_list[1:]
+            for elem in elements:
+                if "=" in elem:
+                    split = elem.split("=")
+                    if split[1][0] == "\"":
+                        split[1] = split[1][1:-1]
+                        split[1] = split[1].replace('_', ' ').replace('"', '\\"')
+                    elif split[1].isdigit():
+                        split[1] = int(split[1])
+                    else:
+                        split[1] = float(split[1])
+                    setattr(obj, split[0], split[1])
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
@@ -255,27 +260,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             cmd.Cmd.default(self, line)
 
-    def param_parser(self, params):
-        # create State name="California"
-        #        0                1
-        # ["price=092309.,name="California", "amenety="algo""]
-        # resutl_params = ["name "California"", "amenety "algo""]
-        result_params = []
-        for param in params:
-            if "=" not in param:
-                continue
-            # pair[0] -> key_name
-            # pair[1] -> value
-            pair = param.split("=")
-            if pair[1][0] == "\"" and pair[1][-1:] == "\"":
-                pair[1] = pair[1].replace("_", " ")
-            else:
-                try:
-                    float(pair[1])
-                except Exception:
-                    continue
-            result_params.append(" ".join(pair))
-        return result_params
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
