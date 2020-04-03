@@ -60,7 +60,7 @@ class Place(BaseModel, Base):
         amenities = relationship("Amenity",
                                  secondary=place_amenity)
 
-    if os.getenv('HBNB_TYPE_STORAGE') == 'file':
+    if getenv('HBNB_TYPE_STORAGE') == 'file':
         @property
         def amenities(self):
             """Returns the instances"""
