@@ -1,1 +1,1 @@
-{}
+{"City.15d8eec0-43de-4f05-af96-cb99453791cc": {"__class__": "City", "state_id": "cd813e4c-4950-4fbe-a213-5d5cb4d52dcd", "id": "15d8eec0-43de-4f05-af96-cb99453791cc", "created_at": "2020-04-03T01:22:11.014645", "updated_at": "2020-04-03T01:22:11.014698"}, "State.cd813e4c-4950-4fbe-a213-5d5cb4d52dcd": {"updated_at": "2020-04-03T01:21:24.758414", "name": "California", "id": "cd813e4c-4950-4fbe-a213-5d5cb4d52dcd", "__class__": "State", "created_at": "2020-04-03T01:21:24.758366"}}
