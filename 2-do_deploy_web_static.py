@@ -18,7 +18,18 @@ def do_deploy(archive_path):
     file_ = archive_path.split("/")[-1]
     name = file_.split(".")[0]
     tmp = "/tmp/{}".format(file_)
+    data = "/data/web_static/releases/{}/".format(name)
 
     # Send compressed file
     if put(archive_path, tmp).failed:
         return False
+    # Remove a previous release
+    if run("rm -rf {}".format(data)).failed:
+        return False
+    # Create a directorty to allocate the new release
+    if run("mkdir -p {}".format(data)).failed:
+        return False
+    # Uncompress archive
+    if run("tar -xzf {} -C {}".format(tmp, data)).failed:
+        return False
+    
