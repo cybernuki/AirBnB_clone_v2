@@ -19,6 +19,7 @@ def do_deploy(archive_path):
     name = file_.split(".")[0]
     tmp = "/tmp/{}".format(file_)
     data = "/data/web_static/releases/{}/".format(name)
+    current =  "/data/web_static/current"
 
     # Send compressed file
     if put(archive_path, tmp).failed:
@@ -33,12 +34,17 @@ def do_deploy(archive_path):
     if run("tar -xzf {} -C {}".format(tmp, data)).failed:
         return False
     # Remove compressed archive
-    if run ("rm {}".format(tmp)).failed:
+    if run("rm {}".format(tmp)).failed:
         return False
     # Move uncomprresed data of web static to the release folder
-    if run ("mv {}web_static/* {}".format(data, data)).failed:
+    if run("mv {}web_static/* {}".format(data, data)).failed:
         return False
     # Remove uncompressed data from sistem
-    if run ("rm -rf {}web_static".format(data)).failed:
+    if run("rm -rf {}web_static".format(data)).failed:
         return False
-
+    # Remove previous link to web static content
+    if run("rm -rf {}".format(current)).failed:
+        return False
+    # Create a new link to the new release content
+    if run("ln -s {} {}".format(data, current)).failed:
+        return False
