@@ -32,4 +32,13 @@ def do_deploy(archive_path):
     # Uncompress archive
     if run("tar -xzf {} -C {}".format(tmp, data)).failed:
         return False
-    
+    # Remove compressed archive
+    if run ("rm {}".format(tmp)).failed:
+        return False
+    # Move uncomprresed data of web static to the release folder
+    if run ("mv {}web_static/* {}".format(data, data)).failed:
+        return False
+    # Remove uncompressed data from sistem
+    if run ("rm -rf {}web_static".format(data)).failed:
+        return False
+
