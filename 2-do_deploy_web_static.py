@@ -19,7 +19,7 @@ def do_deploy(archive_path):
     name = file_.split(".")[0]
     tmp = "/tmp/{}".format(file_)
     data = "/data/web_static/releases/{}/".format(name)
-    current =  "/data/web_static/current"
+    current = "/data/web_static/current"
 
     # Send compressed file
     if put(archive_path, tmp).failed:
@@ -48,3 +48,5 @@ def do_deploy(archive_path):
     # Create a new link to the new release content
     if run("ln -s {} {}".format(data, current)).failed:
         return False
+    # Finish the deploy!
+    print("New version deployed!")
