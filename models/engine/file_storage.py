@@ -70,3 +70,8 @@ class FileStorage:
             self.save()
         except KeyError:
             return
+
+    def close(self):
+        """Close the session
+        """
+        self.reload()
