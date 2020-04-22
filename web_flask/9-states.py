@@ -71,9 +71,6 @@ def states(id=None):
         states = states.get('State.{}'.format(id), None)
     return render_template('9-states.html', states=states)
 
-    
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
