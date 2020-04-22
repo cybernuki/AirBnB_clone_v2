@@ -44,7 +44,8 @@ class DBStorage:
                 for res in result:
                     _objects.append(res)
         else:
-            _objects = self.__session.query(eval(cls)).all()
+            cls = eval(cls) if isinstance(cls, str) else cls
+            _objects = self.__session.query(cls).all()
         for obj in _objects:
             key = type(obj).__name__ + "." + str(obj.id)
             _obj[key] = obj
